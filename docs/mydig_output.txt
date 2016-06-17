@@ -1,0 +1,101 @@
+
+
+
+Part-B
+--------
+
+
+
+
+Mydig is written in java. To execute it the attached java file needs to be compiled and executed on a java compiler. The details of the compilation and execution steps are mentioned in the README file.
+To run mydig two arguments need to be entered as command line arguments: args[0] = <name - url>  and args[1] = <type - A, NS, or MX>
+
+Output format:
+---------------
+The first line of output states the No. of queries made, No of lines/servers of answer , No. of authority server information, No. Of additional server information.
+This is followed by the corresponding detailed server information for each server in each section.
+
+The Output is similar to that obtained from dig command and that shown by google dig app toolbox(https://toolbox.googleapps.com/apps/dig)
+
+**On some queries like(www.gmail.com), CNAME server information is shown in ANSWER section when queried for MX and NS type, with SOA server information in AUTHORITY section. For such url mydig tool shows similar output.
+
+Futher mydig tool outputs the total time from query to response in milliseconds, followed by the IP of the server and the date and time of the query.
+
+The tool generated takes care of cases where resolution is not possible and prints out the error message.
+
+
+
+Below mentioned are few sample inputs and their consecutive outputs:
+
+********************************************************************************************************************************************
+
+Input:
+cs.stonybrook.edu A
+
+Output:
+
+QUERY: 1, ANSWER: 1, AUTHORITY: 2, ADDITIONAL: 2
+;;QUESTION
+cs.stonybrook.edu.	0	IN	A
+;;ANSWER
+cs.stonybrook.edu.	86400	IN	A	130.245.9.212
+;;AUTHORITY
+cs.stonybrook.edu.	28800	IN	NS	dns01.cs.stonybrook.edu.
+cs.stonybrook.edu.	28800	IN	NS	dns02.cs.stonybrook.edu.
+;;ADDITIONAL
+dns01.cs.stonybrook.edu.	28800	IN	A	130.245.1.15
+dns02.cs.stonybrook.edu.	28800	IN	A	130.245.1.48
+;; Query time: 166 msec
+;; SERVER: 10.11.0.49
+;; WHEN: Tue Feb 16 23:12:17 EST 2016
+
+
+********************************************************************************************************************************************
+
+
+Input:
+cs.stonybrook.edu NS
+
+Output:
+QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 2
+;;QUESTION
+cs.stonybrook.edu.	0	IN	NS
+;;ANSWER
+cs.stonybrook.edu.	28800	IN	NS	dns01.cs.stonybrook.edu.
+cs.stonybrook.edu.	28800	IN	NS	dns02.cs.stonybrook.edu.
+;;AUTHORITY
+;;ADDITIONAL
+dns01.cs.stonybrook.edu.	28800	IN	A	130.245.1.15
+dns02.cs.stonybrook.edu.	28800	IN	A	130.245.1.48
+;; Query time: 177 msec
+;; SERVER: 10.11.0.49
+;; WHEN: Tue Feb 16 23:13:27 EST 2016
+
+
+
+********************************************************************************************************************************************
+Input:
+cs.stonybrook.edu MX
+
+Output:
+QUERY: 1, ANSWER: 5, AUTHORITY: 2, ADDITIONAL: 2
+;;QUESTION
+cs.stonybrook.edu.	0	IN	MX
+;;ANSWER
+cs.stonybrook.edu.	28800	IN	MX	10 ASPMX3.GOOGLEMAIL.COM.
+cs.stonybrook.edu.	28800	IN	MX	5 ALT2.ASPMX.L.GOOGLE.COM.
+cs.stonybrook.edu.	28800	IN	MX	2 ASPMX.L.GOOGLE.COM.
+cs.stonybrook.edu.	28800	IN	MX	10 ASPMX2.GOOGLEMAIL.COM.
+cs.stonybrook.edu.	28800	IN	MX	5 ALT1.ASPMX.L.GOOGLE.COM.
+;;AUTHORITY
+cs.stonybrook.edu.	28800	IN	NS	dns01.cs.stonybrook.edu.
+cs.stonybrook.edu.	28800	IN	NS	dns02.cs.stonybrook.edu.
+;;ADDITIONAL
+dns01.cs.stonybrook.edu.	28800	IN	A	130.245.1.15
+dns02.cs.stonybrook.edu.	28800	IN	A	130.245.1.48
+;; Query time: 163 msec
+;; SERVER: 10.11.0.49
+;; WHEN: Tue Feb 16 23:14:07 EST 2016
+
+
+********************************************************************************************************************************************
